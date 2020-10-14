@@ -13,7 +13,7 @@ if r.status_code == requests.codes.ok:
 
   # 以 CSS 的 class 抓出各類頭條新聞
 
-  titles = soup.find_all("h4", class_="title",limit=10)
+  titles = soup.find_all("h4", class_="title",limit=7)
   for title in titles:
     print(title.select_one("a").getText())
     print(title.select_one("a").get("href"))
