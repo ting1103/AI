@@ -1,0 +1,25 @@
+# Chinatimes頭條新聞
+import requests
+from bs4 import BeautifulSoup
+
+# 下載 Chinatimes 首頁內容
+url = 'https://www.chinatimes.com/?chdtv'
+r = requests.get(url)
+
+# 確認是否下載成功
+if r.status_code == requests.codes.ok:
+  # 以 BeautifulSoup 解析 HTML 程式碼
+  soup = BeautifulSoup(r.text, 'html.parser')
+
+  # 以 CSS 的 class 抓出各類頭條新聞
+
+  titles = soup.find_all("h4", class_="title",limit=10)
+  for title in titles:
+    print(title.select_one("a").getText())
+    print(title.select_one("a").get("href"))
+
+# 讀取所有 <b>的標籤內容
+#print(soup.find('b'))
+
+#讀取所有<a>的標籤內容
+#print(soup.find_all('a'))
